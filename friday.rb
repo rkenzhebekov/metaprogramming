@@ -4,13 +4,15 @@ module CheckedAttributes
   end
 
   module ClassMethods
+    p self
     def attr_checked(attribute, &validation)
+      p self
       define_method "#{attribute}=" do |value|
         raise 'Invalid attribute' unless validation.call(value)
         instance_variable_set("@#{attribute}", value)
       end
 
-      define_method "#{attribute}" do
+      define_method "#{atribute}" do
         instance_variable_get("@#{attribute}")
       end
     end
